@@ -1,0 +1,714 @@
+* {
+  box-sizing: border-box;
+}
+
+.signup-page {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  color: #424242;
+  background: #fff;
+  line-height: 1.6;
+}
+
+.signup-page h1,
+.signup-page h2,
+.signup-page h3,
+.signup-page p {
+  margin-top: 0;
+}
+
+.signup-page h1 {
+  font-size: 2rem;
+  font-weight: 500;
+  color: #424242;
+}
+
+.signup-page h2 {
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.signup-page h3 {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.signup-page p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.signup-page a {
+  color: #387ed1;
+  text-decoration: none;
+}
+
+.signup-hero {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 70px 30px 45px;
+  text-align: center;
+}
+
+.signup-hero > h1 {
+  margin-bottom: 10px;
+}
+
+.signup-hero > p {
+  margin-bottom: 45px;
+}
+
+.signup-hero-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+  text-align: left;
+}
+
+.hero-dashboard {
+  width: 420px;
+}
+
+.dashboard-window {
+  width: 100%;
+  height: 250px;
+  border: 1px solid #eee;
+  border-radius: 5px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+  background: #fff;
+  padding: 15px;
+}
+
+.dashboard-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #777;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.console {
+  color: #387ed1;
+}
+
+.dashboard-body {
+  display: flex;
+  gap: 15px;
+  height: 165px;
+  align-items: center;
+}
+
+.watchlist {
+  width: 100px;
+  padding: 10px;
+  border-right: 1px solid #eee;
+  font-size: 12px;
+}
+
+.watchlist div {
+  color: #e64b4b;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.watchlist small {
+  font-size: 8px;
+  color: #999;
+}
+
+.chart {
+  position: relative;
+  width: 180px;
+  height: 110px;
+  background: linear-gradient(
+    180deg,
+    transparent 48%,
+    #eee 49%,
+    transparent 51%
+  );
+}
+
+.chart-bar {
+  position: absolute;
+  width: 90px;
+  height: 30px;
+  background: #387ed1;
+  left: 25px;
+  top: 45px;
+}
+
+.chart-line {
+  position: absolute;
+  width: 110px;
+  height: 3px;
+  background: #43b983;
+  left: 10px;
+  top: 65px;
+  transform: rotate(-8deg);
+}
+
+.chart-bottom {
+  position: absolute;
+  width: 100px;
+  height: 2px;
+  background: #e85c5c;
+  left: 25px;
+  bottom: 15px;
+}
+
+.dashboard-circle {
+  width: 55px;
+  height: 55px;
+  border: 5px solid #f0c94b;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+}
+
+.dashboard-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #888;
+}
+
+.signup-form {
+  width: 300px;
+}
+
+.signup-form h2 {
+  margin-bottom: 3px;
+}
+
+.signup-form > p {
+  font-size: 11px;
+  margin-bottom: 15px;
+}
+
+.mobile-input {
+  height: 42px;
+  border: 1px solid #ddd;
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.india {
+  padding: 0 10px;
+  font-size: 12px;
+  border-right: 1px solid #ddd;
+}
+
+.mobile-input input {
+  border: none;
+  outline: none;
+  padding: 10px;
+  width: 100%;
+  font-size: 12px;
+}
+
+.signup-fields {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.signup-fields > input {
+  width: 100%;
+  height: 42px;
+  border: 1px solid #ddd;
+  outline: none;
+  padding: 10px;
+  font-size: 12px;
+}
+
+.signup-fields > input:focus,
+.mobile-input:focus-within {
+  border-color: #387ed1;
+}
+
+.form-error {
+  color: #d32f2f !important;
+  font-size: 12px !important;
+  margin-bottom: 12px;
+}
+
+.primary-btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.primary-btn,
+.secondary-btn {
+  border: none;
+  background: #387ed1;
+  color: white;
+  padding: 10px 22px;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.primary-btn {
+  width: 100%;
+}
+
+.primary-btn:hover,
+.secondary-btn:hover {
+  background: #2d6eb7;
+}
+
+.terms {
+  margin-top: 15px;
+  font-size: 9px !important;
+}
+
+.existing {
+  font-size: 9px !important;
+}
+
+.existing-account {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 55px 20px;
+  text-align: center;
+}
+
+.existing-account h2 {
+  margin-bottom: 10px;
+}
+
+.investment-section {
+  max-width: 900px;
+  margin: auto;
+  padding: 50px 20px 80px;
+  text-align: center;
+}
+
+.investment-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px 90px;
+  margin-top: 50px;
+  text-align: left;
+}
+
+.investment-item {
+  display: flex;
+  gap: 20px;
+}
+
+.investment-icon {
+  width: 55px;
+  height: 55px;
+  background: #f7f9fb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 27px;
+  flex-shrink: 0;
+}
+
+.investment-item h3 {
+  margin-bottom: 5px;
+}
+
+.investment-item p {
+  font-size: 11px;
+}
+
+.investment-section .secondary-btn {
+  margin-top: 45px;
+}
+
+.steps-section {
+  background: #fafafa;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.steps-container {
+  max-width: 850px;
+  margin: 40px auto 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 80px;
+}
+
+.steps-image {
+  width: 350px;
+}
+
+.video-card {
+  height: 170px;
+  background: #eaf3fc;
+  border-radius: 100px 20px 100px 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.video-screen {
+  position: absolute;
+  left: 90px;
+  top: 40px;
+  width: 170px;
+  height: 95px;
+  background: #387ed1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 25px;
+}
+
+.video-card-small {
+  position: absolute;
+  left: 35px;
+  bottom: 20px;
+  width: 100px;
+  height: 25px;
+  background: #f0b24c;
+}
+
+.steps-list {
+  width: 300px;
+}
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-bottom: 1px solid #eee;
+  padding: 15px 0;
+  text-align: left;
+}
+
+.step span {
+  color: #999;
+  font-size: 12px;
+}
+
+.step p {
+  margin: 0;
+  font-size: 12px;
+}
+
+.benefits-section {
+  max-width: 950px;
+  margin: auto;
+  padding: 90px 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.benefits-image {
+  text-align: center;
+}
+
+.benefit-graphic {
+  height: 220px;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+.percentage {
+  font-size: 50px;
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  color: #387ed1;
+}
+
+.bar {
+  position: absolute;
+  bottom: 30px;
+  width: 25px;
+}
+
+.bar-one {
+  left: 25%;
+  height: 70px;
+  background: #387ed1;
+}
+
+.bar-two {
+  left: 38%;
+  height: 110px;
+  background: #f0b24c;
+}
+
+.bar-three {
+  left: 51%;
+  height: 80px;
+  background: #387ed1;
+}
+
+.circle {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  right: 5%;
+  top: 20%;
+}
+
+.benefits-list > div {
+  margin-bottom: 30px;
+}
+
+.benefits-list h3 {
+  margin-bottom: 5px;
+}
+
+.benefits-list p {
+  font-size: 11px;
+}
+
+.account-section {
+  max-width: 950px;
+  margin: auto;
+  padding: 40px 20px 70px;
+  text-align: center;
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-top: 40px;
+  text-align: left;
+}
+
+.account-card {
+  min-height: 115px;
+  border: 1px solid #eee;
+  padding: 20px;
+  display: flex;
+  gap: 15px;
+}
+
+.account-icon {
+  color: #387ed1;
+}
+
+.account-card h3 {
+  margin-bottom: 5px;
+}
+
+.account-card p {
+  font-size: 10px;
+}
+
+.faq-section {
+  max-width: 950px;
+  margin: auto;
+  padding: 30px 20px 80px;
+}
+
+.faq-section h2 {
+  margin-bottom: 30px;
+}
+
+.faq-list {
+  border-top: 1px solid #ddd;
+}
+
+.faq-item {
+  border-bottom: 1px solid #ddd;
+}
+
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 15px 5px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item p {
+  padding: 0 5px 20px;
+  font-size: 11px;
+}
+
+.final-cta {
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.final-cta h2 {
+  font-size: 25px;
+}
+
+.final-cta p {
+  margin-bottom: 25px;
+}
+
+.footer {
+  background: #fafafa;
+  padding: 55px 20px 30px;
+  color: #666;
+}
+
+.footer-container {
+  max-width: 1000px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.5fr repeat(4, 1fr);
+  gap: 35px;
+}
+
+.footer-logo {
+  color: #387ed1;
+  font-weight: 600;
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.footer-brand p {
+  font-size: 10px;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.social-icons span {
+  font-size: 13px;
+}
+
+.app-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.app-buttons button {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 7px;
+  font-size: 8px;
+}
+
+.footer-column h3 {
+  font-size: 13px;
+  color: #424242;
+  margin-bottom: 15px;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-column a {
+  color: #666;
+  font-size: 10px;
+  margin-bottom: 8px;
+}
+
+.footer-column a:hover {
+  color: #387ed1;
+}
+
+.footer-disclaimer {
+  max-width: 1000px;
+  margin: 50px auto 20px;
+  border-top: 1px solid #eee;
+  padding-top: 25px;
+}
+
+.footer-disclaimer p {
+  font-size: 8px;
+  line-height: 1.7;
+}
+
+.footer-bottom {
+  max-width: 1000px;
+  margin: 20px auto 0;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  font-size: 9px;
+  color: #777;
+}
+
+@media (max-width: 850px) {
+  .signup-hero-content {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .hero-dashboard,
+  .signup-form {
+    width: min(100%, 420px);
+  }
+
+  .benefits-section {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  .account-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .signup-hero {
+    padding-top: 45px;
+  }
+
+  .signup-hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .signup-hero-content {
+    gap: 35px;
+  }
+
+  .dashboard-window {
+    height: 200px;
+  }
+
+  .investment-grid {
+    grid-template-columns: 1fr;
+    gap: 25px;
+  }
+
+  .steps-container {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .steps-image,
+  .steps-list {
+    width: 100%;
+  }
+
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+  }
+}
