@@ -1,5 +1,3 @@
-// Shared helpers for the order explorer: URL <-> filter form <-> API params.
-
 export const STATUSES = ["COMPLETE", "PENDING", "CANCELLED", "REJECTED"];
 export const PRODUCTS = ["CNC", "MIS", "NRML"];
 export const MODES = ["BUY", "SELL"];

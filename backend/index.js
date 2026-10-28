@@ -273,9 +273,7 @@ app.get("/allOrders", async (req, res) => {
   res.json(allOrders);
 });
 
-// Mock checkout: the client sends the (mock) price it showed the user.
-// No real market API or money is involved - this only records the order and
-// updates the user's holdings in the database.
+
 app.post("/newOrder", async (req, res) => {
   try {
     const { name, mode } = req.body;
