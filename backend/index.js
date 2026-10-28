@@ -16,6 +16,7 @@ const { HoldingsModel } = require("./model/HoldingsModel");
 const { PositionsModel } = require("./model/PositionsModel");
 const { OrdersModel } = require("./model/OrdersModel");
 const { UserModel } = require("./model/UserModel");
+const { SavedViewModel } = require("./model/SavedViewModel");
 
 const PORT = process.env.PORT || 3002;
 const uri = process.env.MONGO_URL;
@@ -38,6 +39,36 @@ const verifyPassword = async (password, savedPassword) => {
   );
 };
 
+const backfillOrders = async () => {
+  try {
+    const result = await OrdersModel.collection.updateMany(
+      {
+        $or: [
+          { status: { $exists: false } },
+          { product: { $exists: false } },
+          { value: { $exists: false } },
+          { executedAt: { $exists: false } },
+        ],
+      },
+      [
+        {
+          $set: {
+            status: { $ifNull: ["$status", "COMPLETE"] },
+            product: { $ifNull: ["$product", "CNC"] },
+            value: { $ifNull: ["$value", { $multiply: ["$qty", "$price"] }] },
+            executedAt: { $ifNull: ["$executedAt", { $toDate: "$_id" }] },
+          },
+        },
+      ]
+    );
+    if (result.modifiedCount) {
+      console.log(`Backfilled ${result.modifiedCount} legacy order(s)`);
+    }
+  } catch (error) {
+    console.error("Order backfill failed:", error.message);
+  }
+};
+
 const app = express();
 
 const allowedOrigins = (process.env.ALLOWED_ORIGINS || [
@@ -56,6 +87,7 @@ app.use(cors({
   },
 }));
 app.use(express.json());
+app.use(require("./routes/orderExplorer"));
 
 app.get("/addHoldings", async (req, res) => {
   let tempHoldings = [
@@ -236,17 +268,81 @@ app.get("/allPositions", async (req, res) => {
   res.json(allPositions);
 });
 
+app.get("/allOrders", async (req, res) => {
+  const allOrders = await OrdersModel.find({}).sort({ _id: -1 });
+  res.json(allOrders);
+});
+
+// Mock checkout: the client sends the (mock) price it showed the user.
+// No real market API or money is involved - this only records the order and
+// updates the user's holdings in the database.
 app.post("/newOrder", async (req, res) => {
-  let newOrder = new OrdersModel({
-    name: req.body.name,
-    qty: req.body.qty,
-    price: req.body.price,
-    mode: req.body.mode,
-  });
+  try {
+    const { name, mode } = req.body;
+    const product = ["CNC", "MIS", "NRML"].includes(req.body.product)
+      ? req.body.product
+      : "CNC";
+    const qty = Number(req.body.qty);
+    const price = Number(req.body.price);
 
-  newOrder.save();
+    if (!name || !["BUY", "SELL"].includes(mode)) {
+      return res.status(400).json({ message: "Invalid order" });
+    }
+    if (!Number.isInteger(qty) || qty <= 0) {
+      return res.status(400).json({ message: "Quantity must be a whole number above 0" });
+    }
+    if (!Number.isFinite(price) || price <= 0) {
+      return res.status(400).json({ message: "Invalid price" });
+    }
 
-  res.send("Order saved!");
+    const holding = await HoldingsModel.findOne({ name });
+
+    if (mode === "SELL") {
+      if (!holding || holding.qty < qty) {
+        return res.status(400).json({
+          message: `You only hold ${holding ? holding.qty : 0} share(s) of ${name}`,
+        });
+      }
+
+      holding.qty -= qty;
+      if (holding.qty === 0) {
+        await HoldingsModel.deleteOne({ _id: holding._id });
+      } else {
+        await holding.save();
+      }
+    } else if (holding) {
+      // Weighted-average cost on repeat buys.
+      const totalQty = holding.qty + qty;
+      holding.avg = (holding.avg * holding.qty + price * qty) / totalQty;
+      holding.qty = totalQty;
+      holding.price = price;
+      await holding.save();
+    } else {
+      await new HoldingsModel({
+        name,
+        qty,
+        avg: price,
+        price,
+        net: "+0.00%",
+        day: "+0.00%",
+      }).save();
+    }
+
+    const newOrder = await new OrdersModel({
+      name,
+      qty,
+      price,
+      mode,
+      product,
+      status: "COMPLETE",
+      executedAt: new Date(),
+    }).save();
+
+    return res.status(201).json({ message: "Order saved!", order: newOrder });
+  } catch (error) {
+    console.error("Order error:", error);
+    return res.status(500).json({ message: "Order failed" });
+  }
 });
 
 app.post("/signup", async (req, res) => {
@@ -348,6 +444,8 @@ app.listen(PORT, async () => {
   try {
     await mongoose.connect(uri);
     console.log("DB connected!");
+    await backfillOrders();
+    await SavedViewModel.init();
     console.log(`App started on port ${PORT}!`);
   } catch (error) {
     console.error("MongoDB connection failed:", error.message);

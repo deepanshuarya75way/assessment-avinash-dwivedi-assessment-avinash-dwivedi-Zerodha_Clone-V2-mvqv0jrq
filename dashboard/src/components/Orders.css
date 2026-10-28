@@ -1,0 +1,13 @@
+.ox { width: 100%; font-size: 0.85rem; }
+.ox input, .ox select, .ox button { font-size: 0.85rem; padding: 5px 8px; margin: 2px; border: 1px solid #ddd; background: #fff; border-radius: 2px; }
+.ox button { cursor: pointer; }
+.ox button:disabled { opacity: 0.5; cursor: default; }
+.ox input[type="number"] { width: 80px; }
+.ox-bar { display: flex; flex-wrap: wrap; align-items: center; padding: 8px 0; gap: 2px; }
+.ox-err { color: #d74628; }
+.ox table { width: 100%; border-collapse: collapse; margin: 10px 0; }
+.ox th, .ox td { text-align: right; padding: 8px; border-bottom: 1px solid #f1f1f1; }
+.ox th { color: #919191; font-weight: 400; cursor: pointer; white-space: nowrap; }
+.ox th:first-child, .ox td:first-child { text-align: left; }
+.ox .BUY { color: #48c237; } .ox .SELL { color: #fa764e; }
+.ox-empty { text-align: center; padding: 40px 0; color: #6e6e6e; }
